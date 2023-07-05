@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@import './assets/theme/colours/palette.scss';
+body {
+    font-family: 'Poppins';
+    background-color: $primary-background-light;
+}
+
+.container-fluid {
+    padding: 0;
+    margin: 0;
+}
