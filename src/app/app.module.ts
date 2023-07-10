@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { InternshipManagementModule } from './features/internship-management/internship-management.module';
 import { AuthenticationModule } from './features/authentication/authentication.module';
 import { AccountsManagementModule } from './features/accounts-management/accounts-management.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AccountsManagementModule } from './features/accounts-management/account
     SharedModule,
     InternshipManagementModule,
     AuthenticationModule,
-    AccountsManagementModule
+    AccountsManagementModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
