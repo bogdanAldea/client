@@ -12,6 +12,9 @@ import { TitleComponent } from './typography/title/title.component';
 import { DescriptionComponent } from './typography/description/description.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { CreateMemberDialogComponent } from './dialogs/create-member-dialog/create-member-dialog.component';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,12 +28,15 @@ import {MatSelectModule} from '@angular/material/select';
     BreadcrumbComponent,
     TitleComponent,
     DescriptionComponent,
+    CreateMemberDialogComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
   ],
   exports: [
     InternshipsTableComponent,

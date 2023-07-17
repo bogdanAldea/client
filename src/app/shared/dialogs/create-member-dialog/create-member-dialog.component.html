@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <div class="dialog-header px-5">
+        <app-title title="New member" />
+    </div>
+    
+    <hr>
+    
+    <div class="dialog-body px-5">
+        <form [formGroup]='memberRegistrationForm'>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>First Name</mat-label>
+                <input type="text" matInput placeholder="Firstname" formControlName="firstName">
+                <mat-error *ngIf="memberRegistrationForm.get('firstName')?.hasError('required')">
+                    First Name is required
+                </mat-error>
+                <mat-error >
+                  
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput placeholder="Lastname" formControlName="lastName">
+            <mat-error *ngIf="memberRegistrationForm.get('lastName')?.hasError('required')">
+                Last Name is required
+            </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="email@domain.com"  formControlName="email">
+                <mat-error *ngIf="memberRegistrationForm.get('email')?.hasError('required')">
+                    Email is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field" *ngIf="roles$ | async as roles">
+                <mat-label>Roles</mat-label>
+                <mat-select multiple [(value)]="selectedRoles">
+                  <mat-select-trigger>
+                    {{ showSelectedRoleNames(selectedRoles) }}
+                  </mat-select-trigger>
+                  <mat-option *ngFor="let role of roles" [value]="role">{{role.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </form>
+    </div>
+    
+    <hr>
+    
+    <div class="dialog-footer px-5">
+        <app-button-rect-small actionName="+ Add Member" (click)="getFormData()"/>
+    </div>
+</div>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AccountResponse } from '../interfaces/account-response';
 import { ApiRoutes } from 'src/app/configurations/api-routes/api-routes';
 import { AccountWithRoles } from '../interfaces/account-with-roles';
+import { MemberAccountRequest } from '../interfaces/member-account-request';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class AccountsService {
 
   public getUserAccount = (userAccountId: string) : Observable<AccountResponse> => {
     return this.httpClient.get<AccountResponse>(`${ApiRoutes.Account.Accounts}/${userAccountId}`);
+  }
+
+  public registerNewMember = (memberRequest: MemberAccountRequest): Observable<any> => {
+    return this.httpClient.post<MemberAccountRequest>(`${ApiRoutes.Account.Accounts}`, memberRequest);
   }
 }

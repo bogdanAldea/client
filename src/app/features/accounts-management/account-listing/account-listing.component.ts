@@ -7,6 +7,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AccountRolesService } from '../core/services/account-roles.service';
 import { Role } from '../core/interfaces/role';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CreateMemberDialogComponent } from 'src/app/shared/dialogs/create-member-dialog/create-member-dialog.component';
+import { MemberAccountRequest } from '../core/interfaces/member-account-request';
 
 @Component({
   selector: 'app-account-listing',
@@ -16,28 +18,41 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class AccountListingComponent implements OnInit {
   public accounts$!: Observable<AccountWithRoles[]>
-  public roles$!: Observable<Role[]>;
 
   public constructor(
-    private service: AccountsService, 
-    private roleService: AccountRolesService,
+    private service: AccountsService,
     public dialog: MatDialog){}
 
   public ngOnInit(): void {
     this.accounts$ = this.getAllAccountsFromCompany();
-    this.roles$ = this.getAllRoles();
-    console.log(this.roles$.subscribe(x => console.log(x)))
   }
 
   public openCreateMemberDialog = () => {
+    const dialogRef = this.dialog.open(CreateMemberDialogComponent,  {
+      height: '100vh',
+      width: '500px',
+      position: {'right': '0'},
+    })
 
+    dialogRef.afterClosed().subscribe((formData: MemberAccountRequest) => {
+      this.submitNewMemberAccount(formData);
+    })
   }
 
   private getAllAccountsFromCompany = () : Observable<AccountWithRoles[]> => {
     return this.service.getAllAccountsAtOrganisation('b4f75fed-37bf-40fc-a8b3-f071b41a3fc1');
   }
 
-  private getAllRoles = () : Observable<Role[]> => {
-    return this.roleService.getAllRoles();
-  }
+  private submitNewMemberAccount = (memberAccount: MemberAccountRequest) => {
+    this.service.registerNewMember(memberAccount).subscribe({
+      next: response => {
+        console.log(response);
+        this.ngOnInit()
+      },
+      error: error => {
+        console.log(error)
+      }
+    })
+  } 
+
 }
