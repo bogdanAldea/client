@@ -8,10 +8,12 @@ import { InternshipManagementModule } from './features/internship-management/int
 import { AuthenticationModule } from './features/authentication/authentication.module';
 import { AccountsManagementModule } from './features/accounts-management/accounts-management.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CreateMemberDialogComponent } from './src/app/shared/dialogs/create-member-dialog/create-member-dialog.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CreateMemberDialogComponent
   ],
   imports: [
     BrowserModule,
