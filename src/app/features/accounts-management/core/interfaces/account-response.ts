@@ -3,5 +3,4 @@ export interface AccountResponse {
     lastName: string;
     email: string;
     joiningDate: string;
-    roles: string[];
 }

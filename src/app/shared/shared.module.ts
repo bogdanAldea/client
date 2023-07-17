@@ -10,7 +10,8 @@ import { InternshipOptionCardComponent } from './cards/internship-option-card/in
 import { BreadcrumbComponent } from './navigations/breadcrumb/breadcrumb.component';
 import { TitleComponent } from './typography/title/title.component';
 import { DescriptionComponent } from './typography/description/description.component';
-
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -23,11 +24,13 @@ import { DescriptionComponent } from './typography/description/description.compo
     InternshipOptionCardComponent,
     BreadcrumbComponent,
     TitleComponent,
-    DescriptionComponent
+    DescriptionComponent,
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    MatInputModule,
+    MatSelectModule
   ],
   exports: [
     InternshipsTableComponent,
@@ -35,7 +38,7 @@ import { DescriptionComponent } from './typography/description/description.compo
     InternshipOptionCardComponent,
     BreadcrumbComponent,
     TitleComponent,
-    DescriptionComponent
+    DescriptionComponent,
   ]
 })
 export class SharedModule { }

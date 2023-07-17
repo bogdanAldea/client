@@ -10,7 +10,7 @@
                 <div class="col text-end align-self-end">
                     <div class="">
                         <span class="me-4">13 Accounts</span>
-                        <app-button-rect-small actionName="+ Add Member" />
+                        <app-button-rect-small actionName="+ Add Member" (click)="openCreateMemberDialog()" />
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                                 <span *ngIf="account.roles.length > 1">{{ account.roles[0].name}} + {{ account.roles.length - 1 }} other</span>
                             </td>
                             <td class="d-flex justify-content-end align-items-center">
-                                <app-button-rect-small actionName="-"/>
+                                <app-button-rect-small actionName="-" />
                             </td>
                         </tr>
                     </tbody>

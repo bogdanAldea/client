@@ -17,4 +17,8 @@ export class AccountsService {
     const endpoint: string = ApiRoutes.Organisation.AllAccounts;
     return this.httpClient.get<AccountWithRoles[]>(`${apiUrl}/${organisationId}/${endpoint}`);
   }
+
+  public getUserAccount = (userAccountId: string) : Observable<AccountResponse> => {
+    return this.httpClient.get<AccountResponse>(`${ApiRoutes.Account.Accounts}/${userAccountId}`);
+  }
 }

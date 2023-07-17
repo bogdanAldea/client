@@ -16,12 +16,12 @@
             </form>
         </div>
 
-        <div class="user-account-controls d-flex flex-row">
+        <div class="user-account-controls d-flex flex-row" *ngIf="loggedInUser$ | async as user">
             <img class="account-control-icon mx-5" src="../../../assets/icons/global/notification.svg" alt="">
             <div class="user-welcome-message me-3 p-0 d-flex align-items-center">
               <div class="me-3">
                 <p>Welcome, </p>
-                <p>Firstname</p>
+                <p>{{ user.firstName}}</p>
               </div>
               <img src="../../../assets/images/profile/placeholder-profile-pic.svg" alt="">
             </div>

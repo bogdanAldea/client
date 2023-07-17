@@ -3,71 +3,41 @@ import { AccountResponse } from '../core/interfaces/account-response';
 import { Observable } from 'rxjs';
 import { AccountsService } from '../core/services/accounts.service';
 import { AccountWithRoles } from '../core/interfaces/account-with-roles';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AccountRolesService } from '../core/services/account-roles.service';
+import { Role } from '../core/interfaces/role';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-account-listing',
   templateUrl: './account-listing.component.html',
-  styleUrls: ['./account-listing.component.scss']
+  styleUrls: ['./account-listing.component.scss'],
+
 })
 export class AccountListingComponent implements OnInit {
-  public accounts: AccountResponse[] = [];
   public accounts$!: Observable<AccountWithRoles[]>
+  public roles$!: Observable<Role[]>;
 
-  public constructor(private service: AccountsService){}
+  public constructor(
+    private service: AccountsService, 
+    private roleService: AccountRolesService,
+    public dialog: MatDialog){}
 
   public ngOnInit(): void {
-    // this.accounts.push(
-    //   {
-    //     firstName: "Michael",
-    //     lastName: "Scott",
-    //     email: "scott@gmail.com",
-    //     joiningDate: 'June 04, 2023',
-    //     roles: ['Admin']
-    //   },
+    this.accounts$ = this.getAllAccountsFromCompany();
+    this.roles$ = this.getAllRoles();
+    console.log(this.roles$.subscribe(x => console.log(x)))
+  }
 
-    //   {
-    //     firstName: "Michael",
-    //     lastName: "Scott",
-    //     email: "scott@gmail.com",
-    //     joiningDate: 'June 04, 2023',
-    //     roles: ['Admin']
-    //   },
+  public openCreateMemberDialog = () => {
 
-    //   {
-    //     firstName: "Michael",
-    //     lastName: "Scott",
-    //     email: "scott@gmail.com",
-    //     joiningDate: 'June 04, 2023',
-    //     roles: ['Admin']
-    //   },
+  }
 
-    //   {
-    //     firstName: "Michael",
-    //     lastName: "Scott",
-    //     email: "scott@gmail.com",
-    //     joiningDate: 'June 04, 2023',
-    //     roles: ['Admin']
-    //   },
+  private getAllAccountsFromCompany = () : Observable<AccountWithRoles[]> => {
+    return this.service.getAllAccountsAtOrganisation('b4f75fed-37bf-40fc-a8b3-f071b41a3fc1');
+  }
 
-    //   {
-    //     firstName: "Michael",
-    //     lastName: "Scott",
-    //     email: "scott@gmail.com",
-    //     joiningDate: 'June 04, 2023',
-    //     roles: ['Admin']
-    //   },
-
-    //   {
-    //     firstName: "Michael",
-    //     lastName: "Scott",
-    //     email: "scott@gmail.com",
-    //     joiningDate: 'June 04, 2023',
-    //     roles: ['Admin']
-    //   }
-
-    // );
-    this.accounts$ = this.service
-      .getAllAccountsAtOrganisation('b4f75fed-37bf-40fc-a8b3-f071b41a3fc1');
-      console.log(this.accounts$)
+  private getAllRoles = () : Observable<Role[]> => {
+    return this.roleService.getAllRoles();
   }
 }

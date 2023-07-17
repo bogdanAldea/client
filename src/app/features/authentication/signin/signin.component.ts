@@ -37,7 +37,8 @@ export class SigninComponent {
         // Handle successful response 
         // Token should be stored here
         console.log('Registration successful:', response);
-        this.router.navigate(['/user/internships']);
+        this.authService.saveToken(response.token)
+        this.router.navigate(['/home']);
       },
       error: error => {
         // Handle error
